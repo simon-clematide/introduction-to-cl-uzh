@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 # $Id: tag-eval.perl,v 1.6 2006-04-16 11:49:29 siclemat Exp $
+# s
 my $HELP;
 my $KeyFile;
 my $TestFile;
@@ -37,8 +38,8 @@ my $KeyFilePath = ($KeyFile =~ /^\//?$KeyFile:$PATH . '/' . $KeyFile);
 my $TestFilePath = ($TestFile =~ /^\//?$TestFile:$PATH . '/' . $TestFile);
 
 print
-" CLASSIFICATION STATISTICS
- *************************
+"CLASSIFICATION EVALUATION STATISTICS
+*************************************
 Date: $DATE
 
 Key File: $KeyFilePath
@@ -96,6 +97,14 @@ $~ = 'OUT';
 # Ordnungsrelation nach ansteigender Fehlerfrequenz
 sub byerrorfreq {$errortags{$b} <=> $errortags{$a};};
 
+print "
+Help:
+ total error ratio = percentage points of current line to total error percentage
+ relative error ratio ct = percentage of this confusion w.r.t. the correct tag
+   (how many errors for the correct tag can be attributed to this type of mistake?)
+";
+
+
 print "\
 +-----------------------------------------+-----------------+
 |confusion matrix                         |     error ratio |\n";
@@ -112,7 +121,6 @@ foreach $arg ( sort byerrorfreq (keys %errortags) ) {
 	$wrongtag{$testtag} += $errortags{$arg};
         $error_percentage = ($errorcount*100)/$keytokencounter;
 	$tag_rate = ($errorcount*100)/$keytags{$keytag};
-#	$wrong_tag_rate = ($errorcount*100)/$testtags{$testtag};
 	write;
 	$errortotal += $errorcount;
 };
@@ -120,17 +128,25 @@ foreach $arg ( sort byerrorfreq (keys %errortags) ) {
 
 printf
 "+--------------+-------------+------------+--------+--------+
-|  all         |  all        |%11.d |        | %3.2f |
+|  all         |  all        |%11.d |        |   %3.2f |
 +--------------+-------------+------------+        +--------+\n" ,
   $errortotal, ($errortotal/$keytokencounter)*100;
 
+printf "Tagging accuracy: %3.2f%%\n\n", (1-($errortotal/$keytokencounter))*100;
+
+
 
 print "
- total error ratio = proportion of current line to total error
- relative error ratio ct = proportion of this confusion to correct tag
- relative error ratio wt = contribution of this confusion to wrong tag
+Help:
+ present: actual number of tokens with this tag in the key file
+ found: number of tokens with this tag in the test file
+ wrong: number of tokens in the test file that do not match their key file tag (FP)
+ missed: number of tokens in the key file that have a different tag in the test file (FN)
+ prec: precision
+ recal: recall
+ f-mea: f-measure
+ macr-avg: macro-average: mean of tag-specific prec/recal/f-mea values 
 ";
-
 
 
 
@@ -147,9 +163,9 @@ $testtag, $keytag, $errorcount, $tag_rate, $error_percentage
 ;
 #              Correct=Y   Correct=N
 #            +-----------+-----------+
-# Assigned=Y |     a     |     b     |
+# Assigned=Y |     a (TP)|     b (FP)|
 #            +-----------+-----------+
-# Assigned=N |     c     |     d     |
+# Assigned=N |     c (FN)|     d (TN)|
 #            +-----------+-----------+
 
 # accuracy = (a+d)/(a+b+c+d)
@@ -223,7 +239,5 @@ $MicroAverageFMeasure = ($MicroAveragePrecision + $MicroAverageRecall == 0) ? 0 
 printf
 "| macr-avg |%9.d |%9.d |%9.d |%9.d |%6.2f |%6.2f |%6.2f |
 +----------+----------+----------+----------+----------+-------+-------+-------+
-| micr-avg |%9.d |%9.d |%9.d |%9.d |%6.2f |%6.2f |%6.2f |
-+----------+----------+----------+----------+----------+-------+-------+-------+
 ",
-  $keytokencounter, $testtokencounter,$totalWrongTagCount, $totalMissedTagCount, ($totalPrecision/$i), ($totalRecall/$i),($totalFMeasure/$i), $keytokencounter, $testtokencounter,$totalWrongTagCount, $totalMissedTagCount, ($MicroAveragePrecision), ($MicroAverageRecall),($MicroAverageFMeasure);
+  $keytokencounter, $testtokencounter,$totalWrongTagCount, $totalMissedTagCount, ($totalPrecision/$i), ($totalRecall/$i),($totalFMeasure/$i);
