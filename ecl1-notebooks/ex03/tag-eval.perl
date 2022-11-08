@@ -231,11 +231,6 @@ foreach $theTag (sort(keys %keytags)) {
 print "+----------+----------+----------+----------+----------+-------+-------+-------+\n";
 
 
-$MicroAveragePrecision = ($TotalB == 0 ? 100 : (($TotalB - $totalWrongTagCount)*100 / $TotalB));
-$MicroAverageRecall = ($TotalA == 0 ? 100 : (($TotalB - $totalWrongTagCount)/$TotalA)*100);
-$MicroAverageFMeasure = ($MicroAveragePrecision + $MicroAverageRecall == 0) ? 0 :
-  (2*  $MicroAveragePrecision * $MicroAverageRecall)/( $MicroAveragePrecision + $MicroAverageRecall);
-
 printf
 "| macr-avg |%9.d |%9.d |%9.d |%9.d |%6.2f |%6.2f |%6.2f |
 +----------+----------+----------+----------+----------+-------+-------+-------+
