@@ -1,28 +1,54 @@
 #!/usr/bin/perl -w
-# $Id: tag-eval.perl,v 1.6 2006-04-16 11:49:29 siclemat Exp $
+###################################################################################################
+# Script Name: tag-eval.perl
+# Description: This script evaluates tag classification by comparing a test file against a key file.
+#              It calculates error rates, precision, recall, and F-measure to analyze the performance
+#              of tag classification.
+#
+# Usage:       tag-eval.perl -f <key file> -e <file with errors>
+# Options:
+#              -f|k <key file>         : Path to the key file treated as a gold standard.
+#              -e <file with errors>   : Path to the test file to be evaluated against the key file.
+#              -g <file with errors>   : Alias for -e, for compatibility.
+#              -h|help                 : Display the help message and exit.
+#              --ignore-html           : Ignore lines in the input files starting with HTML tags.
+#
+# Input Format: Both the key file and the test file should contain token-tag pairs in each line,
+#               separated by whitespace. Example:
+#               token1 tag1
+#               token2 tag2
+#
+# Output:       The script prints detailed statistics including error counts, precision, recall, and
+#               F-measure for each tag. It also includes summaries and macro-averages.
+###################################################################################################
+
+# Load necessary libraries for command-line option processing
+use Getopt::Long; # Standardbibliothek fuer Optionenverarbeitung laden
+
+# Declare and initialize variables for command-line options
 my $HELP;
 my $KeyFile;
 my $TestFile;
 my $IGNOREHTML;
+
+# Script name extraction for usage message
 my $SCRIPT = `basename $0` ;
 chomp $SCRIPT ;
 
+# Usage message to guide users on how to execute the script
 my $USAGE=
     "usage: $SCRIPT -f <key file> -e <file with errors>\n
 ";
 
-
-# Optionen der Befehlszeile abarbeiten
-use Getopt::Long; # Standardbibliothek fuer Optionenverarbeitung laden
+# Process command-line options
 &GetOptions
 	(
 	 "f|k=s" => \$KeyFile,
 	 "e=s" => \$TestFile,
-	 "g=s" =>  \$TestFile, # for compatibility
 	 "h|help" => \$HELP,
 	 "ignore-html" => \$IGNOREHTML
 	 );
-
+# Display usage message if help is requested or necessary options are missing
 die $USAGE if defined $HELP;
 die $USAGE unless defined $KeyFile && defined $TestFile;
 
@@ -56,15 +82,17 @@ my %keytags = ();
 my %testtags =();
 my $keytokencounter=0;
 
-
-# Read in loop
+# Main loop for reading and comparing lines from key and test files
 while (<KEYFILE>) {
+  # Skipping empty lines, comment lines, and optionally lines starting with HTML tags
   next if (/^\s*$/ or /^%%/) ;
   next if ($IGNOREHTML && /^</);
   my $keyfile_line = $. ;
   $keytokencounter++ ;
   ($keytoken,$keytag) = /^(\S+)\s+(\S+)/ ;
   $keytags{$keytag}++ ;
+
+  # Comparison logic: tokens and tags are compared, errors are recorded
   TESTIN: {
 	  if (defined( $_ = <TESTFILE> )) {
 		goto TESTIN if (/^\s*$/ or /^%%/) ;
@@ -88,7 +116,8 @@ File '$TestFile' on line $. has Token '$testtoken'\n";
 close (KEYFILE) ;
 close (TESTFILE) ;
 
-# Formatting
+# Printing formatted results including various statistics such as error ratios and confusion matrices
+
 $= = 999999; # long pages :)
 $^ = 'top';
 $~ = 'OUT';
@@ -112,7 +141,6 @@ foreach $arg ( sort byerrorfreq (keys %errortags) ) {
 	$wrongtag{$testtag} += $errortags{$arg};
         $error_percentage = ($errorcount*100)/$keytokencounter;
 	$tag_rate = ($errorcount*100)/$keytags{$keytag};
-#	$wrong_tag_rate = ($errorcount*100)/$testtags{$testtag};
 	write;
 	$errortotal += $errorcount;
 };
@@ -193,9 +221,7 @@ foreach $theTag (sort(keys %keytags)) {
   $wrongTagCount = (exists($wrongtag{$theTag})? $wrongtag{$theTag} : 0) ;
 
   $A = (exists( $keytags{$theTag}) ? $keytags{$theTag} : 0) ;
-  $TotalA += $A;
   $B = (exists($testtags{$theTag})? $testtags{$theTag} : 0) ;
-  $TotalB += $B;
   $missedTagCount = $A-$B+$wrongTagCount;
 
 #  warn "B: $B A:$A Wrongtagcount:$wrongTagCount tag2: $testtags{$theTag} tag1:  $keytags{$theTag} \n";
