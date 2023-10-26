@@ -221,7 +221,9 @@ foreach $theTag (sort(keys %keytags)) {
   $wrongTagCount = (exists($wrongtag{$theTag})? $wrongtag{$theTag} : 0) ;
 
   $A = (exists( $keytags{$theTag}) ? $keytags{$theTag} : 0) ;
+  $TotalA += $A;
   $B = (exists($testtags{$theTag})? $testtags{$theTag} : 0) ;
+  $TotalB += $B;
   $missedTagCount = $A-$B+$wrongTagCount;
 
 #  warn "B: $B A:$A Wrongtagcount:$wrongTagCount tag2: $testtags{$theTag} tag1:  $keytags{$theTag} \n";
