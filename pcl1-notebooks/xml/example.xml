@@ -1,0 +1,23 @@
+<!-- XML file example for Python ElementTree (Original example by Martin Volk)-->
+<div> <!-- The root element: root.tag contains the div -->
+   <!-- Sequence of subelements s are in a Python -->
+   <s id="a2-s117" lang="en">
+   	<!-- all subelements w are in a list -->
+        <w id="a2-s117-w1" pos="VBZ" lemma="be">Is</w>
+        <!-- the attributes will be in a Python dictionary -->
+        <!-- {'id':'a2-s117-w1', 'pos':'VBZ', 'lemma':'be'} -->
+        <w id="a2-s117-w2" pos="DT" lemma="the">the</w>
+        <!-- the text data in element w can be access via element.text -->
+        <w id="a2-s117-w3" pos="NN" lemma="west">West</w>
+        <w id="a2-s117-w4" pos="RB" lemma="still">still</w>
+        <w id="a2-s117-w5" pos="DT" lemma="a">a</w>
+        <w id="a2-s117-w6" pos="JJ" lemma="dominating">dominating</w>
+        <w id="a2-s117-w7" pos="NN" lemma="power">power</w>
+        <w id="a2-s117-w8" pos="SENT" lemma="?">?</w>
+   </s>
+   <s id="a2-s118" lang="en">
+        <w id="a2-s118-w1" pos="VBZ" lemma="be">Is</w>
+        <w id="a2-s118-w2" pos="DT" lemma="the">the</w>
+        <w id="a2-s118-w3" pos="NN" lemma="east">East</w>
+	</s>
+</div>
