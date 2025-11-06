@@ -1,0 +1,12 @@
+{
+  "LabApp": {
+    "settings": {
+      "@jupyterlab/apputils-extension:notification": {
+        "enabled": false
+      },
+      "@jupyterlab/announcements-extension:plugin": {
+        "enabled": false
+      }
+    }
+  }
+}
