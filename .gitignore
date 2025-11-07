@@ -1,3 +1,6 @@
 /venv/
 *-checkpoint.ipynb
 .DS_Store
+skitouren.xlsx
+Untitled*.ipynb
+**/Untitled*.ipynb
