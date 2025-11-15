@@ -17,7 +17,8 @@ clean-notebooks:
 		--ClearMetadataPreprocessor.enabled=True \
 		--RegexRemovePreprocessor.patterns='"\s*\Z"' \
 		--inplace \
-		**/*.ipynb
+		**/*.ipynb \
+		**/*/*.ipynb
 	@echo "Notebooks cleaned successfully!"
 
 # Remove all generated files
