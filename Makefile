@@ -12,6 +12,7 @@ help:
 # Clean notebook outputs and metadata
 clean-notebooks:
 	@echo "Cleaning Jupyter notebooks..."
+	source venv/bin/activate && \
 	jupyter nbconvert \
 		--clear-output \
 		--ClearMetadataPreprocessor.enabled=True \
