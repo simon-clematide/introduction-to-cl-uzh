@@ -1,0 +1,10 @@
+{
+    "name": "Jürgen",
+    "age": 25,
+    "is_student": true,
+    "subjects": [
+        "Math",
+        "CS"
+    ],
+    "awards": null
+}

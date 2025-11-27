@@ -1,0 +1,3 @@
+{"name": "Alice", "age": 25, "is_student": false, "subjects": ["Math", "CS"]}
+{"name": "Bob", "age": 30, "is_student": true, "subjects": ["Physics"]}
+{"name": "Charlie", "age": 35, "is_student": false, "subjects": ["Chemistry", "Biology"]}
