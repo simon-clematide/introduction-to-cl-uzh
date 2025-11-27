@@ -1,0 +1,30 @@
+<students>
+  <student>
+    <name>Alice</name>
+    <age>25</age>
+    <is_student>false</is_student>
+    <subjects>
+      <subject>Math</subject>
+      <subject>CS</subject>
+    </subjects>
+  </student>
+
+  <student>
+    <name>Bob</name>
+    <age>30</age>
+    <is_student>true</is_student>
+    <subjects>
+      <subject>Physics</subject>
+    </subjects>
+  </student>
+
+  <student>
+    <name>Charlie</name>
+    <age>35</age>
+    <is_student>false</is_student>
+    <subjects>
+      <subject>Chemistry</subject>
+      <subject>Biology</subject>
+    </subjects>
+  </student>
+</students>
