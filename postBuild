@@ -1,2 +1,20 @@
 #!/bin/bash
 python -m nltk.downloader book
+
+# Configure JupyterLab defaults in Binder container:
+# 1. Disable the "Would you like to get notified about official Jupyter news?" popup
+# 2. Render Markdown files (.md) with "Markdown Preview" by default instead of the raw text editor
+SETTINGS_DIR="$(python -c 'import sys, pathlib; print(pathlib.Path(sys.prefix) / "share/jupyter/lab/settings")')"
+mkdir -p "$SETTINGS_DIR"
+cat << 'EOF' > "$SETTINGS_DIR/overrides.json"
+{
+  "@jupyterlab/apputils-extension:notification": {
+    "fetchNews": "false"
+  },
+  "@jupyterlab/docmanager-extension:plugin": {
+    "defaultViewers": {
+      "markdown": "Markdown Preview"
+    }
+  }
+}
+EOF
