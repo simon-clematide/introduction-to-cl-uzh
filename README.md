@@ -2,9 +2,22 @@
 
 [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/simon-clematide/introduction-to-cl-uzh/main)
 
-Notebooks for ECL I exercises can be found in [ecl1-notebooks](ecl1-notebooks)
+Interactive Jupyter notebooks and demonstrations for courses at the Department of Computational Linguistics, University of Zurich:
+- **Introduction to Language Technology (ILT)** (formerly *Einführung in die Computerlinguistik I* / ECL 1)
+- **Programmiertechniken in der Computerlinguistik I (PCL 1)**
 
-Notebooks for PCL I can be found in [pcl1-notebooks](pcl1-notebooks)
+See the [ILT Table of Contents](ILT%20Table%20of%20Contents.ipynb) and [PCL 1 Table of Contents](PCL%201%20Table%20of%20Contents.ipynb).
+
+### Introduction to Language Technology (ILT)
+- **Official Exercise 1 (Session 5 — POS Tagging & Evaluation):**
+  - [Exercise 1 Notebook: Training and Evaluating a Simple TnT-like POS Tagger](ilt-notebooks/ex01/ex01.ipynb)
+- **Lecture Hands-on & Demonstrations:**
+  - Tokenization & Encodings: [tokenization.ipynb](ilt-notebooks/le02/tokenization.ipynb)
+  - Tokenizer Experiments (Moses / Cutter): [tokenizer_experiments.ipynb](ilt-notebooks/le02/tokenizer_experiments.ipynb)
+  - NER / NEL with spaCy: [ICL1_ex04.ipynb](ilt-notebooks/le_extra/ner_nel/ICL1_ex04.ipynb)
+
+### Programmiertechniken in der Computerlinguistik I (PCL 1)
+- Notebooks for PCL 1 can be found in [pcl1-notebooks](pcl1-notebooks).
 
 ## For Python hackers:-)
 
