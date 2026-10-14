@@ -9,7 +9,7 @@ Interactive Jupyter notebooks and demonstrations for courses at the Department o
 See the [ILT Table of Contents](ILT%20Table%20of%20Contents.ipynb) and [PCL 1 Table of Contents](PCL%201%20Table%20of%20Contents.ipynb).
 
 ### Introduction to Language Technology (ILT)
-- **Official Exercise 1 (Session 5 — POS Tagging & Evaluation):**
+- **Official Exercise 1 (Lecture 5 — Classification and Tagging: Predicting Labels for Documents and Tokens):**
   - [Exercise 1 Notebook: Training and Evaluating a Simple TnT-like POS Tagger](ilt-notebooks/ex01/ex01.ipynb)
 - **Lecture Hands-on & Demonstrations:**
   - Tokenization & Encodings: [tokenization.ipynb](ilt-notebooks/le02/tokenization.ipynb)
